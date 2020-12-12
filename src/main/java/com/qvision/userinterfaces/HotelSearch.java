@@ -10,10 +10,7 @@ public class HotelSearch {
     public static final Target ADULT = Target.the("NUMBER ADULT").locatedBy("//input[@name='adults']//ancestor::div[@class = 'dx-dropdowneditor-input-wrapper dx-selectbox-container']");
     public static final Target ROOM = Target.the("NUMBER ROOM").locatedBy("//input[@name='rooms']//ancestor::div[@class = 'dx-dropdowneditor-input-wrapper dx-selectbox-container']");
     public static final Target CHILDREN = Target.the("NUMBER CHILDREN").locatedBy("//input[@name='children']//ancestor::div[@class = 'dx-dropdowneditor-input-wrapper dx-selectbox-container']");
-    public static final Target SELECTBOX_ADULT = Target.the("SELECT BOX NUMBER").locatedBy("//div[contains(@style,'translate(262px, 316px)')]//child::div[contains(text(), '{0}')]");
-    public static final Target SELECTBOX_CHILDREN = Target.the("SELECT BOX NUMBER").locatedBy("//div[contains(@style,'translate(358px, 316px)')]//child::div[contains(text(), '{0}')]");
-    public static final Target SELECTBOX_ROOM = Target.the("SELECT BOX NUMBER").locatedBy("//div[contains(@style,'translate(71px, 316px)')]//child::div[contains(text(), '{0}')]");
-
+    public static final Target SELECT_BOX = Target.the("SELECT BOX NUMBER").locatedBy("//div[contains(@class,'dx-overlay-wrapper')]//div[text()='{0}']");
     public static final Target SEARCH = Target.the("SEARCH BUTTON").locatedBy("div[aria-label *= 'SEARCH']");
 
 }

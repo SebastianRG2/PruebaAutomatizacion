@@ -1,6 +1,7 @@
 package com.qvision.stepdefinitions;
 
 import com.qvision.tasks.EnterHotelSearch;
+import com.qvision.tasks.Result;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,6 +13,7 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import java.util.Map;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 public class HotelPriceStepDefinitions {
 
@@ -28,6 +30,7 @@ public class HotelPriceStepDefinitions {
 
     @When("Enter the hotel with the lowest price")
     public void enterTheHotelWithTheLowestPrice() {
+        theActorInTheSpotlight().attemptsTo(Result.hotel());
     }
 
     @Then("Will visualize that the price to be charged to the client is the agreed")
