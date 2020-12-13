@@ -4,6 +4,7 @@ import com.qvision.exceptions.ExceptionError;
 import com.qvision.questions.TotalPrice;
 import com.qvision.tasks.EnterHotelSearch;
 import com.qvision.tasks.Result;
+import com.qvision.tasks.ResultPages;
 import com.qvision.utils.MsgError;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -38,6 +39,11 @@ public class HotelPriceStepDefinitions {
     @When("^Enter the hotel with the lowest price$")
     public void enterTheHotelWithTheLowestPrice() {
         theActorInTheSpotlight().attemptsTo(Result.hotel());
+    }
+
+    @When("^Enter the hotel pages with the lowest price$")
+    public void enterTheHotelPagesWithTheLowestPrice() {
+        theActorInTheSpotlight().attemptsTo(ResultPages.hotel());
     }
 
     @Then("^Will visualize that the (.*) to be charged to the client is the agreed$")

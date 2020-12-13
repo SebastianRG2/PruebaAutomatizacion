@@ -1,5 +1,6 @@
 package com.qvision.interactions;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
@@ -15,18 +16,16 @@ import java.util.stream.Collectors;
 import static com.qvision.userinterfaces.ResultHotel.*;
 
 public class SelectPages implements Interaction {
-    private int numberPages;
-
-    public SelectPages(int numberPages) {
-        this.numberPages = numberPages;
-    }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        int numberPagesAux = numberPages+1;
+
+        List<String> pages = TOTAL_PAGES.resolveAllFor(actor).stream().map(WebElementFacade::getText).collect(Collectors.toList());
+        String totalPages = pages.stream().max(String::compareTo).get();
+        int numberPagesAux = Integer.parseInt(totalPages);
         List<String> listPrice = new ArrayList<>();
 
-        for (int i = 0; i < numberPages; i++) {
+        for (int i = 0; i < Integer.parseInt(totalPages); i++) {
             List<String> listPriceAux = PRICE_HOTEL.resolveAllFor(actor).stream().map(WebElementFacade::getText).collect(Collectors.toList());
             listPrice.add(listPriceAux.get(0));
             listPrice.add(listPriceAux.get(1));
@@ -36,14 +35,16 @@ public class SelectPages implements Interaction {
             numberPagesAux--;
         }
         String price = listPrice.stream().min(String::compareTo).get();
-        for (int i = 0; i < numberPages; i++) {
-            actor.attemptsTo(Click.on(PAGE_INDEX.of(String.valueOf(numberPagesAux))));
+        for (int i = 0; i < Integer.parseInt(totalPages); i++) {
             numberPagesAux++;
-            actor.attemptsTo(Check.whether(BOOK_BUTTON.of(price.substring(1)).resolveFor(actor).isCurrentlyVisible()).andIfSo(
+            actor.attemptsTo(Click.on(PAGE_INDEX.of(String.valueOf(numberPagesAux))));
+           actor.attemptsTo(Check.whether(BOOK_BUTTON.of(price.substring(1)).resolveFor(actor).isVisible()).andIfSo(
                     Click.on(BOOK_BUTTON.of(price.substring(1)))
             ));
+           // if(BOOK_BUTTON.of(price.substring(1)).resolveFor(actor).isSelected());
+           //actor.attemptsTo(Click.on(BOOK_BUTTON.of(price.substring(1))));
             if(BOOK_BUTTON.of(price.substring(1)).resolveFor(actor).isCurrentlyVisible());
-            i = numberPages+1;
+            i = Integer.parseInt(totalPages)+1;
         }
     }
 
