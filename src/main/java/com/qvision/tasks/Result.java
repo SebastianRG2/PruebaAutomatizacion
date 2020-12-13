@@ -6,6 +6,8 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 
 public class Result implements Task {
+
+
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(Select.price());
